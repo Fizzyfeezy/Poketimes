@@ -22,7 +22,7 @@ export class Post extends Component {
     
     render() {
         const head = {
-            fontWeight: 'bold'
+           fontWeight: 'bold'
         }
         const post = this.state.post ? (
             <div className="post card">
