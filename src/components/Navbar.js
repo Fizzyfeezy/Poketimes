@@ -10,7 +10,7 @@ function Navbar(props) {
             <nav>
                 <div className="nav-wrapper teal darken-3">
                     <div className="container">
-                        <a href="#" className="brand-logo">Poke'Times</a>
+                        <Link to ="#" className="brand-logo">Poke'Times</Link>
                         <ul id="nav-mobile" className="right hide-on-med-and-down">
                             <li><Link to ="/">Home</Link></li>
                             <li><NavLink to ="/about">About</NavLink></li>
