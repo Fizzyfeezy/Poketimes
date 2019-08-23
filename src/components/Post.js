@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Rainbow from '../hoc/Rainbow';
 //import axios from 'axios';
 import {connect} from 'react-redux';
+import {deletePost} from '../action/postAction';
 
 export class Post extends Component {
     // constructor(props) {
@@ -60,7 +61,7 @@ const mapStateToProps = (state, ownProps) =>{
 }
 const mapStateToDispatch = (dispatch) => {
     return{
-        deletePost : (id) => {dispatch({type : 'DELETE_POST', id : id})}
+        deletePost : (id) => {dispatch(deletePost(id))}
     }
 }
 
