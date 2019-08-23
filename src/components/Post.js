@@ -20,6 +20,10 @@ export class Post extends Component {
     //         })
     //     })
     // }
+    handleClick = (e) => {
+        this.props.deletePost(this.props.post.id);
+        this.props.history.push('/');
+    }
     
     render() {
         const head = {
@@ -31,6 +35,9 @@ export class Post extends Component {
                 <div className="card-content">
                     <span className = 'card-title center' style = {head}>{this.props.post.title}</span>
                     <p>{this.props.post.body}</p>
+                </div>
+                <div className="center">
+                    <button className="btn red" onClick = {this.handleClick}>Delete Post</button>
                 </div>
             </div>
         ) : (
@@ -45,11 +52,16 @@ export class Post extends Component {
     }
 }
 
-const mapStateToprops = (state, ownProps) =>{
+const mapStateToProps = (state, ownProps) =>{
     let id =  parseInt(ownProps.match.params.post_id);
     return{
         post: state.posts.find(post => post.id === id)
     }
 }
+const mapStateToDispatch = (dispatch) => {
+    return{
+        deletePost : (id) => {dispatch({type : 'DELETE_POST', id : id})}
+    }
+}
 
-export default connect(mapStateToprops)(Rainbow(Post))
+export default connect(mapStateToProps, mapStateToDispatch)(Rainbow(Post))
