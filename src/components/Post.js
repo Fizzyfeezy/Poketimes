@@ -1,34 +1,36 @@
 import React, { Component } from 'react'
 import Rainbow from '../hoc/Rainbow';
-import axios from 'axios';
+//import axios from 'axios';
+import {connect} from 'react-redux';
 
 export class Post extends Component {
-    constructor(props) {
-        super(props)
+    // constructor(props) {
+    //     super(props)
     
-        this.state = {
-             post : null
-        }
-    }
-    componentDidMount(){
-        let id = this.props.match.params.post_id;
-        axios.get('https://jsonplaceholder.typicode.com/posts/' + id).then(res => {
-            console.log(res);
-            this.setState({
-                post : res.data
-            })
-        })
-    }
+    //     this.state = {
+    //          post : null
+    //     }
+    // }
+    // componentDidMount(){
+    //     let id = this.props.match.params.post_id;
+    //     axios.get('https://jsonplaceholder.typicode.com/posts/' + id).then(res => {
+    //         console.log(res);
+    //         this.setState({
+    //             post : res.data
+    //         })
+    //     })
+    // }
     
     render() {
         const head = {
            fontWeight: 'bold'
         }
-        const post = this.state.post ? (
+        console.log(this.props)
+        const post = this.props.post ? (
             <div className="post card">
                 <div className="card-content">
-                    <span className = 'card-title center' style = {head}>{this.state.post.title}</span>
-                    <p>{this.state.post.body}</p>
+                    <span className = 'card-title center' style = {head}>{this.props.post.title}</span>
+                    <p>{this.props.post.body}</p>
                 </div>
             </div>
         ) : (
@@ -43,4 +45,11 @@ export class Post extends Component {
     }
 }
 
-export default Rainbow(Post)
+const mapStateToprops = (state, ownProps) =>{
+    let id =  parseInt(ownProps.match.params.post_id);
+    return{
+        post: state.posts.find(post => post.id === id)
+    }
+}
+
+export default connect(mapStateToprops)(Rainbow(Post))
